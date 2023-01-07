@@ -114,4 +114,37 @@ describe('Range class', () => {
             });
         });
     });
+
+    describe('Allows step indexing', () => {
+        test('Can get integer step from index', () => {
+            const rng = new Range(0, 10, 2);
+            const comp = [0,2,4,6,8,10];
+            const idx = Math.floor(Math.random() * comp.length);
+            expect(rng.step(idx)).toBe(comp[idx]);
+        });
+        test('Can get floating point step from index', () => {
+            const rng = new Range(0, 2, 0.25);
+            const comp = [0,0.25,0.5,0.75,1.0,1.25,1.5,1.75,2.0];
+            const idx = Math.floor(Math.random() * comp.length);
+            expect(rng.step(idx)).toBe(comp[idx]);
+        });
+        test('Can get index from integer step value', () => {
+            const rng = new Range(0, 10, 2);
+            const comp = [0,2,4,6,8,10];
+            const idx = Math.floor(Math.random() * comp.length);
+            expect(rng.indexOf(comp[idx])).toBe(idx);
+        });
+        test('Can get index from floating point step', () => {
+            const rng = new Range(0, 2, 0.25);
+            const comp = [0,0.25,0.5,0.75,1.0,1.25,1.5,1.75,2.0];
+            const idx = Math.floor(Math.random() * comp.length);
+            expect(rng.indexOf(comp[idx])).toBe(idx);
+        });
+        test('Throws error on index out of bounds', () => {
+            const rng = new Range(0, 10, 2);
+            expect(() => rng.step(-1)).toThrow(Error);
+            expect(() => rng.step(10)).toThrow('Invalid index');
+            expect(() => rng.step(2.5)).toThrow(Error);
+        });
+    });
 });
