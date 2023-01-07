@@ -56,6 +56,22 @@ export default class Range {
         return size > 0 ? size : 0;
     }
 
+    /**
+     * Returns whether the given value is a valid step within the current range
+     * @param {Number} value - Value to test
+     * @returns {Boolean} - True if value is valid step in range, otherwise false
+     */
+    inRange(value) {
+        const min = Math.min(this._start, this._stop);
+        const max = Math.max(this._start, this._stop);
+
+        return (
+            (value >= min) && (value <= max) && (this.size > 0) &&
+            ((this._normalise(value) - this._normalise(this._start)) 
+            % this._normalise(this._step) === 0)
+        );
+    }
+    
     /* Internal use only */
     _normalise(value) {
         return Math.round(value * this.normaliser);
