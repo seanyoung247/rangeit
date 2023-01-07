@@ -147,4 +147,41 @@ describe('Range class', () => {
             expect(() => rng.step(2.5)).toThrow(Error);
         });
     });
+
+    describe('Can calculate valid range steps', () => {
+        describe('Value wrapping', () => {
+            test('Wraps values below minimum back to maximum', () => {
+                const rng = new Range(0, 5, 0.25);
+                expect(rng.wrap(-0.25)).toBe(4.75);
+                expect(rng.wrap(-1)).toBe(4);
+            });
+            test('Wraps values above maximum back to minimum', () => {
+                const rng = new Range(0, 5, 0.25);
+                expect(rng.wrap(5.5)).toBe(0.5);
+                expect(rng.wrap(6)).toBe(1);
+            });
+            test('Keeps values to valid steps', () => {
+                const rng = new Range(0, 5, 0.25);
+                expect(rng.wrap(1.23)).toBe(1.25);
+                expect(rng.wrap(0.1)).toBe(0);
+            });
+        });
+        describe('Value clamping', () => {
+            test('Clamps values below minimum to minimum', () => {
+                const rng = new Range(0, 5, 0.25);
+                expect(rng.clamp(-0.25)).toBe(0);
+                expect(rng.clamp(-1)).toBe(0);
+            });
+            test('Clamps values above maximum to maximum', () => {
+                const rng = new Range(0, 5, 0.25);
+                expect(rng.clamp(5.5)).toBe(5);
+                expect(rng.clamp(6)).toBe(5);
+            });
+            test('Keeps values to valid steps', () => {
+                const rng = new Range(0, 5, 0.25);
+                expect(rng.clamp(1.23)).toBe(1.25);
+                expect(rng.clamp(0.1)).toBe(0);
+            });
+        });
+    });
 });
