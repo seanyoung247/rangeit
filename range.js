@@ -57,6 +57,26 @@ export default class Range {
     }
 
     /**
+     * Returns the value of a step at index given
+     * @param {Number} index - The index of the step
+     * @returns {Number} The step value
+     */
+    step(index) {
+        const value = this._indexToStep(index);
+        if (!this.inRange(value)) throw new Error('Invalid index');
+        return value;
+    }
+
+    /**
+     * Returns the index of a given step in the range
+     * @param {Number} value - Value to find
+     * @returns {Number} The step index of the value
+     */
+    indexOf(value) {
+        return this.inRange(value) ? this._stepToIndex(value) : -1;
+    }
+
+    /**
      * Returns whether the given value is a valid step within the current range
      * @param {Number} value - Value to test
      * @returns {Boolean} - True if value is valid step in range, otherwise false
@@ -71,9 +91,18 @@ export default class Range {
             % this._normalise(this._step) === 0)
         );
     }
-    
+
     /* Internal use only */
     _normalise(value) {
         return Math.round(value * this.normaliser);
     }
+
+    _stepToIndex(value) {
+        return Math.abs((this._normalise(value) - this._normalise(this._start)) / this._normalise(this._step));
+    }
+
+    _indexToStep(index) {
+        return (this._normalise(this._start) + (this._normalise(this._step) * index)) / this.normaliser;
+    }
+
 }
