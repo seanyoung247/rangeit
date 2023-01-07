@@ -72,4 +72,13 @@ describe('Range class', () => {
             )
         });
     });
+
+    describe('Range properties', () => {
+        test('Can get range size', () => {
+            const rng1 = new Range(10);
+            const rng2 = new Range(10,0,-1);
+            expect(rng1.size).toBe(11);
+            expect(rng2.size).toBe(11);
+        });
+    });
 });
