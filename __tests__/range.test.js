@@ -44,4 +44,32 @@ describe('Range class', () => {
             expect(() => new Range(1, {}, 2)).toThrow('All range inputs must be valid numbers');
         });
     });
+
+    describe('Range iteration', () => {
+        function compareRangeValues(rng, vals) {
+            let i = 0;
+            expect(rng.size).toBe(vals.length);
+            for (const val of rng) {
+                expect(val).toBe(vals[i++]);
+            }
+        }
+        test('Can iterate forward range', () => {
+            compareRangeValues(
+                new Range(10), 
+                [0,1,2,3,4,5,6,7,8,9,10]
+            );
+        });
+        test('Can iterate reverse range', () => {
+            compareRangeValues(
+                new Range(10,0,-1),
+                [10,9,8,7,6,5,4,3,2,1,0]
+            );
+        });
+        test('Iterates ranges with floating point steps', () => {
+            compareRangeValues(
+                new Range(0,5,0.5),
+                [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5]
+            )
+        });
+    });
 });
