@@ -1,3 +1,4 @@
+
 /**
  * Range Class
  * 
@@ -92,6 +93,37 @@ export default class Range {
         );
     }
 
+    /**
+     * Wraps the given value within the range. If the value is above the maximum, 
+     * it's wrapped back from the minimum and vice versa. If the value is within 
+     * the range, but is not a valid step, the closest valid step is returned.
+     * @param {Number} value - value to wrap
+     * @returns {Number} - Wrapped value
+     */
+    wrap(value) {
+        const min = Math.min(this._start, this._stop);
+        const max = Math.max(this._start, this._stop);
+        const wrapped = (( (value % (max - min)) 
+            + (max - min)) % (max - min) + min);
+
+        return this._makeValidStep(wrapped);
+    }
+
+    /**
+     * Clamps the given value within the range. If the value is above the maximum,
+     * maximum is returned. If it is below the minimum, minimum is returned. If the
+     * value is within the range, but is not a valid step, the closest valid step 
+     * is returned.
+     * @param {Number} value - value to wrap
+     * @returns {Number} - Wrapped value
+     */
+    clamp(value) {
+        const min = Math.min(this._start, this._stop);
+        const max = Math.max(this._start, this._stop);
+
+        return this._makeValidStep(Math.min(Math.max(value, min), max));
+    }
+
     /* Internal use only */
     _normalise(value) {
         return Math.round(value * this.normaliser);
@@ -105,4 +137,7 @@ export default class Range {
         return (this._normalise(this._start) + (this._normalise(this._step) * index)) / this.normaliser;
     }
 
+    _makeValidStep(value) {
+        return this._indexToStep(Math.round(this._stepToIndex(value)));
+    }
 }
