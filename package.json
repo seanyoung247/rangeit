@@ -1,0 +1,23 @@
+{
+  "name": "rangejs",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Models a range of numbers between a start and stop with a variable step interval.",
+  "main": "range.js",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanyoung247/rangejs.git"
+  },
+  "author": "Sean Young",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seanyoung247/rangejs/issues"
+  },
+  "homepage": "https://github.com/seanyoung247/rangejs#readme",
+  "dependencies": {
+    "jest": "^29.3.1"
+  }
+}
