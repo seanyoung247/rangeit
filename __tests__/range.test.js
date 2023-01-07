@@ -81,4 +81,37 @@ describe('Range class', () => {
             expect(rng2.size).toBe(11);
         });
     });
+
+    describe('Range values', () => {
+        describe('Detects valid step values', () => {
+            test('Detects integer values in range', () => {
+                const rng = new Range(0, 10, 2);
+                expect(rng.inRange(6)).toBe(true);
+            });
+            test('Detects floating point values in range', () => {
+                const rng = new Range(0, 2, 0.25);
+                expect(rng.inRange(0.75)).toBe(true);
+            });
+            test('Detects integer values out of range', () => {
+                const rng = new Range(10);
+                expect(rng.inRange(-4)).toBe(false);
+                expect(rng.inRange(12)).toBe(false);
+            });
+            test('Detects floating point values out of range', () => {
+                const rng = new Range(0, 2, 0.25);
+                expect(rng.inRange(-1.5)).toBe(false);
+                expect(rng.inRange(5.5)).toBe(false);
+            });
+            test('Detects integer values in range but not valid step', () => {
+                const rng = new Range(0, 10, 2);
+                expect(rng.inRange(5)).toBe(false);
+                expect(rng.inRange(6.5)).toBe(false);
+            });
+            test('Detects floating point values in range but not valid step', () => {
+                const rng = new Range(0, 2, 0.25);
+                expect(rng.inRange(0.126)).toBe(false);
+                expect(rng.inRange(1.1)).toBe(false);
+            });
+        });
+    });
 });
