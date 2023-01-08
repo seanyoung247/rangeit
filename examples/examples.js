@@ -3,54 +3,43 @@ import {example} from "./utils.js";
 
 (()=>{
 
-const rng = range(0, 10, 2);
+const rng = range(0, 10, 2); // (0,2,4,6,8,10)
 
 
 example(
     'Creating a range with one parameter:',
 
-    ()=>{
-        const rng = new Range(5);
-        return rng.size === 6;
-    }
+    ()=>(new Range(5)).size === 6   // (0,1,2,3,4,5)
 );
 
 
 example(
     'Creating a range with two parameters:',
 
-    ()=>{
-        const rng = new Range(1, 5);
-        return rng.size === 5;
-    }
+    ()=>(new Range(1, 5)).size === 5 // (1,2,3,4,5)
 )
 
 
 example(
     'Creating a range with three parameters:',
     
-    ()=>{
-        const rng = new Range(1, 5, 2);
-        return rng.size === 3;
-    }
+    ()=>(new Range(1, 5, 2)).size === 3 // (1,3,5)
 )
 
 
 example(
     'Creating a range with helper function:',
 
-    ()=>{
-        const rng1 = range(5);
-        const rng2 = range(1, 5);
-        const rng3 = range(1, 5, 2);
-
-        return (rng1.size === 6) && (rng2.size === 5) && (rng3.size === 3);
-    }
+    ()=>(
+        (range(5).size === 6) && 
+        (range(1, 5).size === 5) &&
+        (range(1, 5, 2).size === 3)
+    )
 );
 
 
 example(
-    'Getting range size:',
+    'Getting range(0, 10, 2) size:',
 
     ()=>rng.size
 );
@@ -100,14 +89,14 @@ example(
 example(
     'Getting range values from index:',
 
-    ()=>rng.step(2)
+    ()=>console.log('range(0, 10, 2).step(2) ===', rng.step(2))
 );
 
 
 example(
     'Getting index from range value:',
 
-    ()=>rng.indexOf(4)
+    ()=>console.log('range(0, 10, 2).indexOf(4) ===', rng.indexOf(4))
 );
 
 
