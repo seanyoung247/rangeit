@@ -142,3 +142,7 @@ export default class Range {
         return this._indexToStep(Math.round(this._stepToIndex(value)));
     }
 }
+
+export function range(start, stop=start, step=1) {
+    return new Range(start, stop, step)
+}
