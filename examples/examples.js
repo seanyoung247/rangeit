@@ -7,7 +7,7 @@ const rng = range(0, 10, 2);
 example(
     'Creating a range with no parameters:',
 
-    () => {
+    ()=>{
         const rng = new Range();
         return rng.size > 0
     }
@@ -17,7 +17,7 @@ example(
 example(
     'Creating a range with one parameter:',
 
-    () => {
+    ()=>{
         const rng = new Range(5);
         return rng.size === 6;
     }
@@ -27,7 +27,7 @@ example(
 example(
     'Creating a range with two parameters:',
 
-    () => {
+    ()=>{
         const rng = new Range(1, 5);
         return rng.size === 5;
     }
@@ -37,7 +37,7 @@ example(
 example(
     'Creating a range with three parameters:',
     
-    () => {
+    ()=>{
         const rng = new Range(1, 5, 2);
         return rng.size === 3;
     }
@@ -47,7 +47,7 @@ example(
 example(
     'Creating a range with helper function:',
 
-    () => {
+    ()=>{
         const rng1 = range();
         const rng2 = range(5);
         const rng3 = range(1, 5);
@@ -61,14 +61,14 @@ example(
 example(
     'Getting range size:',
 
-    () => rng.size
+    ()=>rng.size
 );
 
 
 example(
     'Iterating over a range:',
 
-    () => {
+    ()=>{
         for (const value of new Range(5)) {
             console.log(value);
         }
@@ -79,14 +79,14 @@ example(
 example(
     'Creating an array from a range:',
 
-    () => [...new Range(5)]
+    ()=>[...new Range(5)]
 );
 
 
 example(
     'Checking whether a value is a valid range step:',
 
-    () => {
+    ()=>{
         console.log("-1 in range(0, 10, 2):", 
             rng.inRange(-1)
         );
@@ -109,21 +109,21 @@ example(
 example(
     'Getting range values from index:',
 
-    () => rng.step(2)
+    ()=>rng.step(2)
 );
 
 
 example(
     'Getting index from range value:',
 
-    () => rng.indexOf(4)
+    ()=>rng.indexOf(4)
 );
 
 
 example(
     'Wrapping values to range:',
 
-    () => {
+    ()=>{
         console.log('-3 wrapped to range(0, 10, 2):',
             rng.wrap(-3)
         );
@@ -140,7 +140,7 @@ example(
 example(
     'Clamping values to range:',
 
-    () => {
+    ()=>{
         console.log('-3 clamped to range(0, 10, 2):',
             rng.clamp(-3)
         );
