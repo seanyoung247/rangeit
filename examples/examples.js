@@ -137,8 +137,30 @@ example(
 );
 
 
-function example(title, func) {
+example(
+    'Clamping values to range:',
+
+    () => {
+        console.log('-3 clamped to range(0, 10, 2):',
+            rng.clamp(-3)
+        );
+        console.log('13 clamped to range(0, 10, 2):',
+            rng.clamp(13)
+        );
+        console.log('3 clamped to range(0, 10, 2):',
+            rng.clamp(3)
+        );
+    }
+)
+
+
+
+
+
+
+function example(title, func, ws=true) {
     console.log(title);
     const ret = func();
     if (ret) console.log(ret);
+    if (ws) console.log();
 }
