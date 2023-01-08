@@ -5,7 +5,7 @@
  * Models a range of numbers between start and stop with a given step interval.
  */
 export class Range {
-        /**
+    /**
      * Creates a new number range.
      * If no values given, the range will be 0 to MAX_SAFE_INTEGER.
      * If one number is passed, the range will be 0 to given number.
@@ -21,6 +21,7 @@ export class Range {
         this._start = start === stop ? 0 : start;
         this._stop = stop;
         this._step = step;
+
         /**
          * normaliser is used to remove floating point imprecision from step calculations.
          * Default value is 1e10 which should work for most circumstances, but can be changed
@@ -30,6 +31,7 @@ export class Range {
          * @public
          */
         this.normaliser = 1e10;
+
         // If Range has been initialised with any invalid values, raise exception
         if (!Object.values(this).every(el => Number.isFinite(el))) {
             throw new TypeError('Tried to create range with invalid inputs');
@@ -129,6 +131,7 @@ export class Range {
 export function range(start, stop=start, step=1) {
     return new Range(start, stop, step)
 }
+
 
 /* Helper functions */
 function normalise(value, rng) {
