@@ -5,34 +5,37 @@ describe('Range class', () => {
 
     describe('range creation', () => {
         test('Creates correct range with one parameter', () => {
-            const rng = new Range(5);
-            const comp = [0,1,2,3,4,5];
-            expect([...rng]).toEqual(comp);
+            compareRangeValues(
+                new Range(5),
+                [0,1,2,3,4,5]
+            );
         });
         test('Creates correct range with two parameters', () => {
-            const rng = new Range(1, 5);
-            const comp = [1,2,3,4,5];
-            expect([...rng]).toEqual(comp);
+            compareRangeValues(
+                new Range(1, 5),
+                [1,2,3,4,5]
+            );
         });
         test('Creates correct range with three parameters', () => {
-            const rng = new Range(1, 10, 2);
-            const comp = [1,3,5,7,9];
-            expect([...rng]).toEqual(comp);
+            compareRangeValues(
+                new Range(1, 10, 2),
+                [1,3,5,7,9]
+            );
         });
         test('Creates reverse ranges', () => {
-            const rng = new Range(10, 1, -1);
-            const comp = [10,9,8,7,6,5,4,3,2,1];
-            expect([...rng]).toEqual(comp);
+            compareRangeValues(
+                new Range(10, 1, -1),
+                [10,9,8,7,6,5,4,3,2,1]
+            );
         });
         test('Floating point ranges', () => {
-            const rng = new Range(0.5, 0.55, 0.01);
-            const comp = [0.5,0.51,0.52,0.53,0.54,0.55];
-            expect([...rng]).toEqual(comp);
+            compareRangeValues(
+                new Range(0.5, 0.55, 0.01),
+                [0.5,0.51,0.52,0.53,0.54,0.55]
+            );
         });
         test('Handles ranges with no valid steps', () => {
-            const rng = new Range(10,1,1);
-            const comp = [];
-            expect([...rng]).toEqual(comp);
+            compareRangeValues(new Range(10,1,1), []);
         });
         test('Throws error on incorrect parameters', () => {
             expect(() => new Range()).toThrow(TypeError);
@@ -41,29 +44,24 @@ describe('Range class', () => {
         });
 
         test('Helper function creates correct ranges', () => {
-            let rng = range(5);
-            let comp = [0,1,2,3,4,5];
-            expect([...rng]).toEqual(comp);
 
-            rng = range(1, 5);
-            comp = [1,2,3,4,5];
-            expect([...rng]).toEqual(comp);
+            compareRangeValues(range(5), [0,1,2,3,4,5]);
 
-            rng = range(1, 10, 2);
-            comp = [1,3,5,7,9];
-            expect([...rng]).toEqual(comp);
+            compareRangeValues(range(1, 5), [1,2,3,4,5]);
 
-            rng = range(10, 1, -1);
-            comp = [10,9,8,7,6,5,4,3,2,1];
-            expect([...rng]).toEqual(comp);
+            compareRangeValues(range(1, 10, 2), [1,3,5,7,9]);
 
-            rng = range(0.5, 0.55, 0.01);
-            comp = [0.5,0.51,0.52,0.53,0.54,0.55];
-            expect([...rng]).toEqual(comp);
+            compareRangeValues(
+                range(10, 1, -1),
+                [10,9,8,7,6,5,4,3,2,1]
+            );
 
-            rng = range(10,1,1);
-            comp = [];
-            expect([...rng]).toEqual(comp);
+            compareRangeValues(
+                range(0.5, 0.55, 0.01),
+                [0.5,0.51,0.52,0.53,0.54,0.55]
+            );
+
+            compareRangeValues(range(10,1,1), []);
 
             expect(() => range(1, 10, '2')).toThrow(TypeError);
             expect(() => range(1, {}, 2)).toThrow('Tried to create range with invalid inputs');
@@ -71,13 +69,6 @@ describe('Range class', () => {
     });
 
     describe('Range iteration', () => {
-        function compareRangeValues(rng, vals) {
-            let i = 0;
-            expect(rng.size).toBe(vals.length);
-            for (const val of rng) {
-                expect(val).toBe(vals[i++]);
-            }
-        }
         test('Can iterate forward range', () => {
             compareRangeValues(
                 new Range(10), 
@@ -96,26 +87,25 @@ describe('Range class', () => {
                 [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5]
             )
         });
+        test('Works with spread operator', () => {
+            expect([...new Range(5)]).toEqual([0,1,2,3,4,5]);
+        });
     });
 
     describe('Range properties', () => {
         test('Can get range size', () => {
-            const rng1 = new Range(10);
-            const rng2 = new Range(10,0,-1);
-            expect(rng1.size).toBe(11);
-            expect(rng2.size).toBe(11);
+            expect((new Range(10)).size).toBe(11);
+            expect((new Range(10,0,-1)).size).toBe(11);
         });
     });
 
     describe('Range values', () => {
         describe('Detects valid step values', () => {
             test('Detects integer values in range', () => {
-                const rng = new Range(0, 10, 2);
-                expect(rng.inRange(6)).toBe(true);
+                expect((new Range(0, 10, 2)).inRange(6)).toBe(true);
             });
             test('Detects floating point values in range', () => {
-                const rng = new Range(0, 2, 0.25);
-                expect(rng.inRange(0.75)).toBe(true);
+                expect((new Range(0, 2, 0.25)).inRange(0.75)).toBe(true);
             });
             test('Detects integer values out of range', () => {
                 const rng = new Range(10);
@@ -210,3 +200,12 @@ describe('Range class', () => {
         });
     });
 });
+
+
+function compareRangeValues(rng, vals) {
+    let i = 0;
+    expect(rng.size).toBe(vals.length);
+    for (const val of rng) {
+        expect(val).toBe(vals[i++]);
+    }
+}
