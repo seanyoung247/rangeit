@@ -5,6 +5,7 @@
   "description": "Models a range of numbers between a start and stop with a variable step interval.",
   "main": "range.js",
   "scripts": {
+    "example": "node examples/examples.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "repository": {
