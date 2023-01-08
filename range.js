@@ -4,7 +4,7 @@
  * 
  * Models a range of numbers between start and stop with a given step interval.
  */
-export default class Range {
+export class Range {
         /**
      * Creates a new number range.
      * If no values given, the range will be 0 to MAX_SAFE_INTEGER.

@@ -1,4 +1,4 @@
-import Range, {range} from "../range.js";
+import {Range, range} from "../range.js";
 
 
 const rng = range(0, 10, 2);
