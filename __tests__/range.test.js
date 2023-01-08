@@ -4,10 +4,6 @@ import {Range, range} from "../range.js";
 describe('Range class', () => {
 
     describe('range creation', () => {
-        test('Creates correct range with no parameters', () => {
-            const rng = new Range();
-            expect(rng.size).toBeGreaterThan(0);
-        });
         test('Creates correct range with one parameter', () => {
             const rng = new Range(5);
             const comp = [0,1,2,3,4,5];
@@ -39,15 +35,13 @@ describe('Range class', () => {
             expect([...rng]).toEqual(comp);
         });
         test('Throws error on incorrect parameters', () => {
+            expect(() => new Range()).toThrow(TypeError);
             expect(() => new Range(1, 10, '2')).toThrow(TypeError);
-            expect(() => new Range(1, {}, 2)).toThrow('All range inputs must be valid numbers');
+            expect(() => new Range(1, {}, 2)).toThrow('Tried to create range with invalid inputs');
         });
 
         test('Helper function creates correct ranges', () => {
-            let rng = range();
-            expect(rng.size).toBeGreaterThan(0);
-
-            rng = range(5);
+            let rng = range(5);
             let comp = [0,1,2,3,4,5];
             expect([...rng]).toEqual(comp);
 
@@ -72,7 +66,7 @@ describe('Range class', () => {
             expect([...rng]).toEqual(comp);
 
             expect(() => range(1, 10, '2')).toThrow(TypeError);
-            expect(() => range(1, {}, 2)).toThrow('All range inputs must be valid numbers');
+            expect(() => range(1, {}, 2)).toThrow('Tried to create range with invalid inputs');
         });
     });
 

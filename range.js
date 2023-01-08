@@ -19,7 +19,7 @@ export class Range {
      */
     constructor(start, stop=start, step=1) {
         this._start = start === stop ? 0 : start;
-        this._stop = stop === undefined ? Number.MAX_SAFE_INTEGER : stop;
+        this._stop = stop;
         this._step = step;
         /**
          * normaliser is used to remove floating point imprecision from step calculations.
@@ -32,7 +32,7 @@ export class Range {
         this.normaliser = 1e10;
         // If Range has been initialised with any invalid values, raise exception
         if (!Object.values(this).every(el => Number.isFinite(el))) {
-            throw new TypeError('All range inputs must be valid numbers');
+            throw new TypeError('Tried to create range with invalid inputs');
         }
     }
 
