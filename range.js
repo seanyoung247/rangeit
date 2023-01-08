@@ -44,7 +44,7 @@ export class Range {
         const step = this._normalise(this._step);
         let count = this._normalise(this._start);
         for (let i = 0; i < size; i++) {
-            yield count / this.normaliser;
+            yield this._deNormalise(count);
             count += step;
         }
     }
@@ -127,7 +127,14 @@ export class Range {
 
     /* Internal use only */
     _normalise(value) {
+        // Only need to normalise if the range values are floating point
+        if (Object.values(this).every(el => Number.isInteger(el))) return value;
         return Math.round(value * this.normaliser);
+    }
+
+    _deNormalise(value) {
+        if (Object.values(this).every(el => Number.isInteger(el))) return value;
+        return value / this.normaliser;
     }
 
     _stepToIndex(value) {
@@ -135,7 +142,7 @@ export class Range {
     }
 
     _indexToStep(index) {
-        return (this._normalise(this._start) + (this._normalise(this._step) * index)) / this.normaliser;
+        return this._deNormalise(this._normalise(this._start) + (this._normalise(this._step) * index));
     }
 
     _makeValidStep(value) {
