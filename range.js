@@ -41,10 +41,10 @@ export class Range {
      */
     *[Symbol.iterator]() {
         const size = this.size;
-        const step = this._normalise(this._step);
-        let count = this._normalise(this._start);
+        const step = normalise(this._step, this);
+        let count = normalise(this._start, this);
         for (let i = 0; i < size; i++) {
-            yield this._deNormalise(count);
+            yield deNormalise(count, this);
             count += step;
         }
     }
@@ -64,7 +64,7 @@ export class Range {
      * @returns {Number} The step value
      */
     step(index) {
-        const value = this._indexToStep(index);
+        const value = indexToStep(index, this);
         if (!this.inRange(value)) throw new Error('Invalid index');
         return value;
     }
@@ -75,7 +75,7 @@ export class Range {
      * @returns {Number} The step index of the value
      */
     indexOf(value) {
-        return this.inRange(value) ? this._stepToIndex(value) : -1;
+        return this.inRange(value) ? stepToIndex(value, this) : -1;
     }
 
     /**
@@ -89,8 +89,8 @@ export class Range {
 
         return (
             (value >= min) && (value <= max) && (this.size > 0) &&
-            ((this._normalise(value) - this._normalise(this._start)) 
-            % this._normalise(this._step) === 0)
+            ((normalise(value, this) - normalise(this._start, this)) 
+            % normalise(this._step, this) === 0)
         );
     }
 
@@ -107,7 +107,7 @@ export class Range {
         const wrapped = (( (value % (max - min)) 
             + (max - min)) % (max - min) + min);
 
-        return this._makeValidStep(wrapped);
+        return makeValidStep(wrapped, this);
     }
 
     /**
@@ -122,34 +122,34 @@ export class Range {
         const min = Math.min(this._start, this._stop);
         const max = Math.max(this._start, this._stop);
 
-        return this._makeValidStep(Math.min(Math.max(value, min), max));
-    }
-
-    /* Internal use only */
-    _normalise(value) {
-        // Only need to normalise if the range values are floating point
-        if (Object.values(this).every(el => Number.isInteger(el))) return value;
-        return Math.round(value * this.normaliser);
-    }
-
-    _deNormalise(value) {
-        if (Object.values(this).every(el => Number.isInteger(el))) return value;
-        return value / this.normaliser;
-    }
-
-    _stepToIndex(value) {
-        return Math.abs((this._normalise(value) - this._normalise(this._start)) / this._normalise(this._step));
-    }
-
-    _indexToStep(index) {
-        return this._deNormalise(this._normalise(this._start) + (this._normalise(this._step) * index));
-    }
-
-    _makeValidStep(value) {
-        return this._indexToStep(Math.round(this._stepToIndex(value)));
+        return makeValidStep(Math.min(Math.max(value, min), max), this);
     }
 }
 
 export function range(start, stop=start, step=1) {
     return new Range(start, stop, step)
+}
+
+/* Helper functions */
+function normalise(value, rng) {
+    // Only need to normalise if the range values are floating point
+    if (Object.values(rng).every(el => Number.isInteger(el))) return value;
+    return Math.round(value * rng.normaliser);
+}
+
+function deNormalise(value, rng) {
+    if (Object.values(rng).every(el => Number.isInteger(el))) return value;
+    return value / rng.normaliser;
+}
+
+function stepToIndex(value, rng) {
+    return Math.abs((normalise(value, rng) - normalise(rng._start, rng)) / normalise(rng._step, rng));
+}
+
+function indexToStep(index, rng) {
+    return deNormalise(normalise(rng._start, rng) + (normalise(rng._step, rng) * index), rng);
+}
+
+function makeValidStep(value, rng) {
+    return indexToStep(Math.round(stepToIndex(value, rng)), rng); 
 }
