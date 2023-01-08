@@ -7,14 +7,13 @@
 export class Range {
     /**
      * Creates a new number range.
-     * If no values given, the range will be 0 to MAX_SAFE_INTEGER.
      * If one number is passed, the range will be 0 to given number.
      * If two numbers are passed, the range will be start to stop.
      * If three numbers are passed, the range will be start to stop 
      * with interval step.
      * 
      * @param {Number} start (optional) First value in range
-     * @param {Number} stop (optional) Range upper bound
+     * @param {Number} stop Range upper bound
      * @param {Number} step (optional) Interval step
      */
     constructor(start, stop=start, step=1) {
@@ -22,18 +21,13 @@ export class Range {
         this._stop = stop;
         this._step = step;
 
-        /**
-         * normaliser is used to remove floating point imprecision from step calculations.
-         * Default value is 1e10 which should work for most circumstances, but can be changed
-         * if required. Calculations are multiplied by this number to make step
-         * calculations integer operations instead of floating point operations.
-         * @type {Number}
-         * @public
-         */
-        this.normaliser = 1e10;
-
+        this._normaliser = 1e10;
+        if (checkValues(this, Number.isInteger)) {
+            // Don't need to normalise if all values are integers
+            this._normaliser = 1;
+        }
         // If Range has been initialised with any invalid values, raise exception
-        if (!Object.values(this).every(el => Number.isFinite(el))) {
+        if (!checkValues(this, Number.isFinite)) {
             throw new TypeError('Tried to create range with invalid inputs');
         }
     }
@@ -134,15 +128,16 @@ export function range(start, stop=start, step=1) {
 
 
 /* Helper functions */
+function checkValues(rng, comp) {
+    return comp(rng._start) && comp(rng._stop) && comp(rng._step);
+}
+
 function normalise(value, rng) {
-    // Only need to normalise if the range values are floating point
-    if (Object.values(rng).every(el => Number.isInteger(el))) return value;
-    return Math.round(value * rng.normaliser);
+    return Math.round(value * rng._normaliser);
 }
 
 function deNormalise(value, rng) {
-    if (Object.values(rng).every(el => Number.isInteger(el))) return value;
-    return value / rng.normaliser;
+    return value / rng._normaliser;
 }
 
 function stepToIndex(value, rng) {
