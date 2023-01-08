@@ -81,8 +81,8 @@ export class Range {
 
         return (
             (value >= min) && (value <= max) && (this.size > 0) &&
-            ((normalise(value, this) - normalise(this._start, this)) 
-            % normalise(this._step, this) === 0)
+            ((normalise(value, this) - normalise(this._start, this)) %
+            normalise(this._step, this) === 0)
         );
     }
 
@@ -96,8 +96,8 @@ export class Range {
     wrap(value) {
         const min = Math.min(this._start, this._stop);
         const max = Math.max(this._start, this._stop);
-        const wrapped = (( (value % (max - min)) 
-            + (max - min)) % (max - min) + min);
+        const wrapped = (( (value % (max - min)) +
+            (max - min)) % (max - min) + min);
 
         return makeValidStep(wrapped, this);
     }
@@ -131,7 +131,7 @@ export class Range {
  * @param {Number} step (optional) Interval step
  */
 export function range(start, stop=start, step=1) {
-    return new Range(start, stop, step)
+    return new Range(start, stop, step);
 }
 
 

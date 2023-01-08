@@ -17,14 +17,14 @@ example(
     'Creating a range with two parameters:',
 
     ()=>(new Range(1, 5)).size === 5 // (1,2,3,4,5)
-)
+);
 
 
 example(
     'Creating a range with three parameters:',
     
     ()=>(new Range(1, 5, 2)).size === 3 // (1,3,5)
-)
+);
 
 
 example(
@@ -131,6 +131,6 @@ example(
             rng.clamp(3)
         );
     }
-)
+);
 
 })();

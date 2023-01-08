@@ -85,7 +85,7 @@ describe('Range class', () => {
             compareRangeValues(
                 new Range(0,5,0.5),
                 [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5]
-            )
+            );
         });
         test('Works with spread operator', () => {
             expect([...new Range(5)]).toEqual([0,1,2,3,4,5]);
