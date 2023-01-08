@@ -6,7 +6,7 @@
  */
 export class Range {
     /**
-     * Creates a new number range.
+     * Creates a new number range object.
      * If one number is passed, the range will be 0 to given number.
      * If two numbers are passed, the range will be start to stop.
      * If three numbers are passed, the range will be start to stop 
@@ -22,10 +22,6 @@ export class Range {
         this._step = step;
 
         this._normaliser = 1e10;
-        if (checkValues(this, Number.isInteger)) {
-            // Don't need to normalise if all values are integers
-            this._normaliser = 1;
-        }
         // If Range has been initialised with any invalid values, raise exception
         if (!checkValues(this, Number.isFinite)) {
             throw new TypeError('Tried to create range with invalid inputs');
@@ -46,7 +42,7 @@ export class Range {
     }
 
     /**
-     * Provides the range size.
+     * Returns the count of valid steps within the range.
      * @returns The count of valid numbers in the range
      */
     get size() {
@@ -68,7 +64,7 @@ export class Range {
     /**
      * Returns the index of a given step in the range
      * @param {Number} value - Value to find
-     * @returns {Number} The step index of the value
+     * @returns {Number} The step index of the value, or -1 if not in range
      */
     indexOf(value) {
         return this.inRange(value) ? stepToIndex(value, this) : -1;
@@ -122,6 +118,18 @@ export class Range {
     }
 }
 
+
+/**
+ * Creates a new number range.
+ * If one number is passed, the range will be 0 to given number.
+ * If two numbers are passed, the range will be start to stop.
+ * If three numbers are passed, the range will be start to stop 
+ * with interval step.
+ * 
+ * @param {Number} start (optional) First value in range
+ * @param {Number} stop Range upper bound
+ * @param {Number} step (optional) Interval step
+ */
 export function range(start, stop=start, step=1) {
     return new Range(start, stop, step)
 }
