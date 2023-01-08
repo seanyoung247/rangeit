@@ -41,10 +41,11 @@ export default class Range {
      */
     *[Symbol.iterator]() {
         const size = this.size;
-        let count = this._start;
+        const step = this._normalise(this._step);
+        let count = this._normalise(this._start);
         for (let i = 0; i < size; i++) {
-            yield count;
-            count = (this._normalise(count) + this._normalise(this._step)) / this.normaliser;
+            yield count / this.normaliser;
+            count += step;
         }
     }
 
