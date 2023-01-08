@@ -114,14 +114,25 @@ example(
 
 
 example(
-    'Checking whether a value is a valid range step:',
+    'Getting index from range value:',
+
+    () => rng.indexOf(4)
+);
+
+
+example(
+    'Wrapping values to range:',
 
     () => {
-        console.log("-1 in range(0, 10, 2): ", rng.inRange(-1));
-        console.log("15 in range(0, 10, 2): ", rng.inRange(15));
-        console.log("1.5 in range(0, 10, 2): ", rng.inRange(1.5));
-        console.log("5 in range(0, 10, 2): ", rng.inRange(5));
-        console.log("6 in range(0, 10, 2): ", rng.inRange(6))
+        console.log('-3 wrapped to range(0, 10, 2):',
+            rng.wrap(-3)
+        );
+        console.log('13 wrapped to range(0, 10, 2):',
+            rng.wrap(13)
+        );
+        console.log('3 wrapped to range(0, 10, 2):',
+            rng.wrap(3)
+        );
     }
 );
 
