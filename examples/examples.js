@@ -84,6 +84,29 @@ example(
 
 
 example(
+    'Checking whether a value is a valid range step:',
+
+    () => {
+        console.log("-1 in range(0, 10, 2):", 
+            rng.inRange(-1)
+        );
+        console.log("15 in range(0, 10, 2):", 
+            rng.inRange(15)
+        );
+        console.log("1.5 in range(0, 10, 2):", 
+            rng.inRange(1.5)
+        );
+        console.log("5 in range(0, 10, 2):",
+            rng.inRange(5)
+        );
+        console.log("6 in range(0, 10, 2):",
+            rng.inRange(6)
+        );
+    }
+);
+
+
+example(
     'Getting range values from index:',
 
     () => rng.step(2)
