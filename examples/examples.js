@@ -1,4 +1,5 @@
 import {Range, range} from "../range.js";
+import {example} from "./utils.js";
 
 
 const rng = range(0, 10, 2);
@@ -152,15 +153,3 @@ example(
         );
     }
 )
-
-
-
-
-
-
-function example(title, func, ws=true) {
-    console.log(title);
-    const ret = func();
-    if (ret) console.log(ret);
-    if (ws) console.log();
-}
