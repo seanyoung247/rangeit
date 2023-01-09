@@ -65,7 +65,7 @@ export class Range {
     /**
      * Returns the index of a given step in the range
      * @param {Number} value - Value to find
-     * @returns {Number} The step index of the value, or -1 if not in range
+     * @returns {Number} The step index of the value or -1 if not in range
      */
     indexOf(value) {
         return this.inRange(value) ? stepToIndex(value, this) : -1;
@@ -74,7 +74,7 @@ export class Range {
     /**
      * Returns whether the given value is a valid step within the current range
      * @param {Number} value - Value to test
-     * @returns {Boolean} - True if value is valid step in range, otherwise false
+     * @returns {Boolean} - True if value is valid step within this range, otherwise false
      */
     inRange(value) {
         const min = Math.min(this._start, this._stop);
@@ -97,8 +97,9 @@ export class Range {
     wrap(value) {
         const min = Math.min(this._start, this._stop);
         const max = Math.max(this._start, this._stop);
-        const wrapped = (( (value % (max - min)) +
-            (max - min)) % (max - min) + min);
+
+        const wrapped = (((value - min) % (max - min)) + 
+            (max - min)) % (max - min) + min;
 
         return makeValidStep(wrapped, this);
     }
@@ -150,7 +151,7 @@ function deNormalise(value, rng) {
 }
 
 function stepToIndex(value, rng) {
-    return Math.abs((normalise(value, rng) - normalise(rng._start, rng)) / normalise(rng._step, rng));
+    return (normalise(value, rng) - normalise(rng._start, rng)) / normalise(rng._step, rng);
 }
 
 function indexToStep(index, rng) {
