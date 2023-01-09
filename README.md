@@ -2,7 +2,7 @@
 
 This module is an ES6 class for creating number ranges with step intervals. Basic usage is inspired by Python's range function, but with extra methods for validating values, accessing steps out of order and by index.
 
-[JSDOC]()
+[JSDOC](https://seanyoung247.github.io/rangejs/)
 
 * Range
     * [constructor](#constructor)
