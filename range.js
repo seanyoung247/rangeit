@@ -56,9 +56,10 @@ export class Range {
      * @returns {Number} The step value
      */
     step(index) {
-        const value = indexToStep(index, this);
-        if (!this.inRange(value)) throw new Error('Invalid index');
-        return value;
+        if (!Number.isInteger(index) || index < 0 || index >= this.size) {
+            throw new Error('Invalid index');
+        }
+        return indexToStep(index, this);
     }
 
     /**
