@@ -28,12 +28,20 @@ example(
 
 
 example(
+    'Creating a reverse range:',
+
+    ()=>(new Range(5,1)).size === 5 // (5,4,3,2,1)
+);
+
+
+example(
     'Creating a range with helper function:',
 
     ()=>(
         (range(5).size === 6) && 
         (range(1, 5).size === 5) &&
-        (range(1, 5, 2).size === 3)
+        (range(1, 5, 2).size === 3) &&
+        (range(5,1).size === 5)
     )
 );
 

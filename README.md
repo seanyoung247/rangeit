@@ -35,18 +35,22 @@ Parameters:
 ```javascript
 import { Range } from "range";
 
-const rng1 = new Range(10);     // (0,1,2,3,4,5,6,7,8,9,10)
-const rng2 = new Range(1,10);   // (1,2,3,4,5,6,7,8,9,10)
-const rng3 = new Range(1,10,2); // (1,3,5,7,9)
+const rng1 = new Range(10);      // (0,1,2,3,4,5,6,7,8,9,10)
+const rng2 = new Range(1,10);    // (1,2,3,4,5,6,7,8,9,10)
+const rng3 = new Range(1,10,2);  // (1,3,5,7,9)
+const rng4 = new Range(10,1);    // (10,9,8,7,6,5,4,3,2,1)
+const rng5 = new Range(10,1,-2); // (10,8,6,4,2)
 ```
 
 Range objects can also be created with the [range]() function:
 ```javascript
 import { range } from "range";
 
-const rng1 = range(10);     // (0,1,2,3,4,5,6,7,8,9,10)
-const rng2 = range(1,10);   // (1,2,3,4,5,6,7,8,9,10)
-const rng3 = range(1,10,2); // (1,3,5,7,9)
+const rng1 = range(10);      // (0,1,2,3,4,5,6,7,8,9,10)
+const rng2 = range(1,10);    // (1,2,3,4,5,6,7,8,9,10)
+const rng3 = range(1,10,2);  // (1,3,5,7,9)
+const rng4 = range(10,1);    // (10,9,8,7,6,5,4,3,2,1)
+const rng5 = range(10,1,-2); // (10,8,6,4,2)
 ```
 
 ### Iterator
