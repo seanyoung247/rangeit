@@ -24,7 +24,7 @@ describe('Range class', () => {
         });
         test('Creates reverse ranges', () => {
             compareRangeValues(
-                new Range(10, 1, -1),
+                new Range(10, 1),
                 [10,9,8,7,6,5,4,3,2,1]
             );
         });
@@ -52,7 +52,7 @@ describe('Range class', () => {
             compareRangeValues(range(1, 10, 2), [1,3,5,7,9]);
 
             compareRangeValues(
-                range(10, 1, -1),
+                range(10, 1),
                 [10,9,8,7,6,5,4,3,2,1]
             );
 
@@ -96,6 +96,17 @@ describe('Range class', () => {
         test('Can get range size', () => {
             expect((new Range(10)).size).toBe(11);
             expect((new Range(10,0,-1)).size).toBe(11);
+        });
+        test('Can\'t write to Range properties', () => {
+            const rng = new Range(10);
+            expect(() => rng._start = 1).toThrow();
+            expect(() => rng._stop = 8).toThrow();
+            expect(() => rng._step = 2).toThrow();
+        });
+        test('Can write to normaliser', () => {
+            const rng = new Range(10);
+            expect(() => rng._normaliser = 1).not.toThrow();
+            expect(rng._normaliser).toBe(1);
         });
     });
 
