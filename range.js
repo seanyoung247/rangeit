@@ -16,10 +16,23 @@ export class Range {
      * @param {Number} stop Range upper bound
      * @param {Number} step (optional) Interval step
      */
-    constructor(start, stop=start, step=1) {
-        this._start = start === stop ? 0 : start;
-        this._stop = stop;
-        this._step = step;
+        Object.defineProperties(this, {
+            _start: {
+                enumerable: true,
+                writable: false,
+                value: start === stop ? 0 : start
+            },
+            _stop: {
+                enumerable: true,
+                writable: false,
+                value: stop,
+            },
+            _step: {
+                enumerable: true,
+                writable: false,
+                value: step
+            }
+        });
 
         this._normaliser = 1e10;
         // If Range has been initialised with any invalid values, raise exception
