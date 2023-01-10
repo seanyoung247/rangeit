@@ -16,6 +16,7 @@ export class Range {
      * @param {Number} stop Range upper bound
      * @param {Number} step (optional) Interval step
      */
+    constructor(start, stop=start, step=start<=stop?1:-1) {
         Object.defineProperties(this, {
             _start: {
                 enumerable: true,
@@ -145,7 +146,7 @@ export class Range {
  * @param {Number} stop Range upper bound
  * @param {Number} step (optional) Interval step
  */
-export function range(start, stop=start, step=1) {
+export function range(start, stop=start, step=start<=stop?1:-1) {
     return new Range(start, stop, step);
 }
 
