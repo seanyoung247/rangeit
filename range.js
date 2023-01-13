@@ -60,7 +60,7 @@ export class Range {
      * @returns The count of valid numbers in the range
      */
     get size() {
-        const size = (1 + Math.floor((this._stop - this._start) / this._step));
+        const size = (Math.floor((this._stop - this._start) / this._step) + 1);
         return size > 0 ? size : 0;
     }
 
