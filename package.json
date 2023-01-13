@@ -31,5 +31,13 @@
       "describe": true,
       "expect": true
     }
-  }
+  },
+  "directories": {
+    "doc": "docs",
+    "example": "examples"
+  },
+  "keywords": [
+    "rangejs",
+    "range"
+  ]
 }
