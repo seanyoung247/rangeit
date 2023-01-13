@@ -1,5 +1,5 @@
 {
-  "name": "rangejs",
+  "name": "@seanyoung247/rangejs",
   "type": "module",
   "version": "1.0.0",
   "description": "Models a range of numbers between a start and stop with a variable step interval.",
