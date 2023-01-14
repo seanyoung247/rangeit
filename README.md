@@ -1,12 +1,12 @@
-# rangejs
+# rangeit
 
 This module is an ES6 class for creating number ranges with step intervals. Basic usage is inspired by Python's range function, but with extra methods for validating values, accessing steps out of order and by index.
 
 
 ## Installation
-Rangejs can be installed using npm:
+Rangeit can be installed using npm:
 ```
-npm install seanyoung247/rangejs
+npm install rangeit
 ```
 
 ## Usage
@@ -42,7 +42,7 @@ Parameters:
 
 **Example**
 ```javascript
-import { Range } from "rangejs";
+import { Range } from "rangeit";
 
 const rng1 = new Range(10);      // (0,1,2,3,4,5,6,7,8,9,10)
 const rng2 = new Range(1,10);    // (1,2,3,4,5,6,7,8,9,10)
@@ -53,7 +53,7 @@ const rng5 = new Range(10,1,-2); // (10,8,6,4,2)
 
 Range objects can also be created with the [range]() function:
 ```javascript
-import { range } from "rangejs";
+import { range } from "rangeit";
 
 const rng1 = range(10);      // (0,1,2,3,4,5,6,7,8,9,10)
 const rng2 = range(1,10);    // (1,2,3,4,5,6,7,8,9,10)
@@ -66,7 +66,7 @@ const rng5 = range(10,1,-2); // (10,8,6,4,2)
 
 Range values can be iterated over in for of loops or using the spread operator, for instance:
 ```javascript
-import { range } from "rangejs";
+import { range } from "rangeit";
 
 for (const value of range(5)) {
     console.log(value);
@@ -79,7 +79,7 @@ console.log([...range(5)]);
 
 The size property gets the number of valid steps in the range.
 ```javascript
-import { range } from "rangejs";
+import { range } from "rangeit";
 
 const rng = range(5); // (0,1,2,3,4,5)
 console.log(rng.size); // 6
@@ -97,7 +97,7 @@ Parameters:
 | index | Number | The index of the step |
 
 ```javascript
-import { range } from "rangejs";
+import { range } from "rangeit";
 
 const rng = range(1,10,2); // (1,3,5,7,9)
 console.log(rng.step(2));  // 5
@@ -115,7 +115,7 @@ Parameters:
 | value | Number | Step value to find |
 
 ```javascript
-import { range } from "rangejs";
+import { range } from "rangeit";
 
 const rng = range(1,10,2);   // (1,3,5,7,9)
 console.log(rng.indexOf(5)); // 2 
@@ -133,7 +133,7 @@ Parameters:
 | value | Number | Value to test |
 
 ```javascript
-import { range } from "rangejs";
+import { range } from "rangeit";
 
 const rng = range(1,10,2); // (1,3,5,7,9)
 console.log(rng.inRange(-1)); // false
@@ -154,7 +154,7 @@ Parameters:
 | value | Number | Value to wrap |
 
 ```javascript
-import { range } from "rangejs";
+import { range } from "rangeit";
 
 const rng = range(1,10); // (1,2,3,4,5,6,7,8,9,10)
 console.log(rng.wrap(-2));  // 7
@@ -174,7 +174,7 @@ Parameters:
 | value | Number | Value to clamp |
 
 ```javascript
-import { range } from "rangejs";
+import { range } from "rangeit";
 
 const rng = range(1,10); // (1,2,3,4,5,6,7,8,9,10)
 console.log(rng.clamp(-2));  // 1
