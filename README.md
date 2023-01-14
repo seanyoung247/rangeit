@@ -4,12 +4,25 @@ This module is an ES6 class for creating number ranges with step intervals. Basi
 
 
 ## Installation
+
 Rangeit can be installed using npm:
 ```
 npm install rangeit
 ```
 
+## Testing
+
+Unit tests are provided using Jest. They can be run using npm:
+```
+npm test
+```
+
 ## Usage
+
+Example code is provided in the file examples/examples.js. They can be run from the project directory using npm:
+```
+npm run example
+```
 
 [JSDOC](https://seanyoung247.github.io/rangejs/)
 
@@ -51,7 +64,7 @@ const rng4 = new Range(10,1);    // (10,9,8,7,6,5,4,3,2,1)
 const rng5 = new Range(10,1,-2); // (10,8,6,4,2)
 ```
 
-Range objects can also be created with the [range]() function:
+Range objects can also be created with the [range](https://seanyoung247.github.io/rangejs/global.html#range) function:
 ```javascript
 import { range } from "rangeit";
 
