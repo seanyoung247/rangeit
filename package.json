@@ -1,7 +1,7 @@
 {
   "name": "rangeit",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Models a range of numbers between a start and stop with a variable step interval.",
   "main": "range.js",
   "scripts": {
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/seanyoung247/rangejs.git"
+    "url": "git+https://github.com/seanyoung247/rangeit.git"
   },
   "author": "Sean Young",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/seanyoung247/rangejs/issues"
   },
-  "homepage": "https://github.com/seanyoung247/rangejs#readme",
+  "homepage": "https://github.com/seanyoung247/rangeit#readme",
   "devDependencies": {
     "jest": "^29.3.1"
   },
